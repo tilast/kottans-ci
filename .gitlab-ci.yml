@@ -7,4 +7,12 @@ before_script:
   - bundle install --deployment --path vendor/bundle --jobs $(nproc)  "${FLAGS[@]}"
 tests:
   script:
-    - bundle exec rake tests
+    - bundle exec rake test
+
+staging:
+  type: deploy
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=test-app-kroosh --api-key=$HEROKU_STAGING_API_KEY
+  only:
+  - master
