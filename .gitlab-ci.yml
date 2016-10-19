@@ -1,0 +1,9 @@
+image: ruby:2.3.1
+before_script:
+  - ruby -v
+  - which ruby
+  - gem install bundler --no-ri --no-rdoc
+  - bundle install --deployment --path vendor/bundle --jobs $(nproc)  "${FLAGS[@]}"
+tests:
+  script:
+    - rake test
