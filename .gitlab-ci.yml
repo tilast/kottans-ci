@@ -13,14 +13,14 @@ cache:
     - vendor/bundle
 
 before_script:
-  - apt-get update -qq && apt-get install -y -qq nodejs libsqlite3-dev
+  - apt-get update -qq && apt-get install -y -qq nodejs libsqlite3-dev postgresql-contrib
   - ruby -v
   - which ruby
   - gem install bundler --no-ri --no-rdoc
   - bundle install --deployment --path vendor/bundle --jobs $(nproc)  "${FLAGS[@]}"
 tests:
   script:
-    - RAILS_ENV=test bundle exec rake db:create db:migrate
+    - RAILS_ENV=test bundle exec rake db:structure:load
     - RAILS_ENV=test bundle exec rake test
 
 staging:
