@@ -46,39 +46,6 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE comments (
-    id integer NOT NULL,
-    name character varying,
-    body text,
-    post_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
-
-
---
 -- Name: posts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -123,13 +90,6 @@ CREATE TABLE schema_migrations (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
 
 
@@ -139,14 +99,6 @@ ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regcl
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
-
-
---
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -166,18 +118,11 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
--- Name: index_comments_on_post_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_comments_on_post_id ON comments USING btree (post_id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20161108233042'), ('20161108233205');
+INSERT INTO schema_migrations (version) VALUES ('20161109001122');
 
 
