@@ -20,6 +20,7 @@ before_script:
   - bundle install --deployment --path vendor/bundle --jobs $(nproc)  "${FLAGS[@]}"
 tests:
   script:
+    - RAILS_ENV=test bundle exec rake db:structure:load
     - RAILS_ENV=test bundle exec rake test
 
 staging:
