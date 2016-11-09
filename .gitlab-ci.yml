@@ -30,5 +30,6 @@ staging:
   script:
   - gem install dpl
   - dpl --provider=heroku --app=test-app-kroosh --api-key=$HEROKU_STAGING_API_KEY
+  - "curl -n -X POST https://api.heroku.com/apps/test-app-kroosh/ps -H \"Accept: application/json\" -H \"Authorization: Bearer ${HEROKU_STAGING_API_KEY}\" -d \"command=bundle exec rails db:migrate\""
   only:
   - master
