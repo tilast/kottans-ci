@@ -9,6 +9,7 @@ variables:
    POSTGRES_PASSWORD: postgres
 
 cache:
+  key: 'cad-project'
   paths:
     - vendor/bundle
 
